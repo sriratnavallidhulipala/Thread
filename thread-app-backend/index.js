@@ -8,7 +8,7 @@ const postRoutes = require("./routes/Post");
 const authRoutes = require("./routes/Auth");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
+const port = process.env.PORT || 8000
 const app = express();
 // Middlewares
 
@@ -48,10 +48,7 @@ main().catch((error) => console.log(error));
 
 async function main() {
   try {
-    await mongoose.connect(process.env.MONGO_DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGO_DB_URL );
     console.log("DB Connected");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -59,6 +56,6 @@ async function main() {
 }
 
 // Server Listening
-app.listen(process.env.PORT, () => {
-  console.log(`Server Listening at PORT ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server Listening at PORT ${port}`);
 });
